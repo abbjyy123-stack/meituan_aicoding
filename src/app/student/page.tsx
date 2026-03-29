@@ -32,6 +32,21 @@ function StudentPageInner() {
   const questions = [
     {
       id: 1,
+      type: 'multi',
+      max: 3,
+      title: "圈定「兴趣大类」",
+      description: "最后一步，选出最让你心动的领域吧！（最多3项）",
+      options: [
+        { label: "💻 科技与学术", val: "tech" },
+        { label: "🏃 体育与户外", val: "sports" },
+        { label: "🎨 舞台与演艺", val: "art" },
+        { label: "❤️ 公益与志愿", val: "volunteer" },
+        { label: "📸 传媒与设计", val: "media" },
+        { label: "💡 创新与创业", val: "startup" },
+      ],
+    },
+    {
+      id: 2,
       type: 'single',
       title: "探寻「核心动机」",
       description: "你希望在社团里收获怎样的体验？",
@@ -39,11 +54,11 @@ function StudentPageInner() {
         { label: "🍻 寻找搭子", val: "social", subtext: "氛围轻松的兴趣社团" },
         { label: "🚀 技能飞跃", val: "skill", subtext: "硬核、有挑战性的社团" },
         { label: "💼 简历加分", val: "career", subtext: "学生组织或新媒体中心" },
-        { label: "🧘 佛系解压", val: "relax", subtext: "低门槛的兴趣小组" }
-      ]
+        { label: "🧘 佛系解压", val: "relax", subtext: "低门槛的兴趣小组" },
+      ],
     },
     {
-      id: 2,
+      id: 3,
       type: 'single',
       title: "明确「投入度与角色」",
       description: "面对即将加入的社团，你更倾向于哪种参与节奏？",
@@ -51,24 +66,9 @@ function StudentPageInner() {
         { label: "🔥 全情投入，想当骨干", val: "high_commitment", subtext: "活动丰富、有门槛的社团" },
         { label: "🌱 零基础小白，求带飞", val: "teaching", subtext: "有完善培训机制的社团" },
         { label: "🎭 只想跨界，玩点不一样的", val: "exploration", subtext: "探索类或跨领域社团" },
-        { label: "👻 潜水观察，偶尔冒泡", val: "low_commitment", subtext: "无考核、氛围宽松的社团" }
-      ]
+        { label: "👻 潜水观察，偶尔冒泡", val: "low_commitment", subtext: "无考核、氛围宽松的社团" },
+      ],
     },
-    {
-      id: 3,
-      type: 'multi',
-      max: 3,
-      title: "圈定「兴趣大类」",
-      description: "选出最让你心动的领域吧！（最多3项）",
-      options: [
-        { label: "💻 科技与学术", val: "tech" },
-        { label: "🏃 体育与户外", val: "sports" },
-        { label: "🎨 舞台与演艺", val: "art" },
-        { label: "❤️ 公益与志愿", val: "volunteer" },
-        { label: "📸 传媒与设计", val: "media" },
-        { label: "💡 创新与创业", val: "startup" }
-      ]
-    }
   ];
 
   const handleSelect = (val: string) => {
@@ -110,12 +110,15 @@ function StudentPageInner() {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTag, setSelectedTag] = useState<
-    "全部" | "学术科技" | "文化艺术" | "体育健身" | "公益实践" | "职场创投" | "校级组织"
-  >("全部");
+    "与你匹配" | "全部" | "学术科技" | "文化艺术" | "体育健身" | "公益实践" | "职场创投" | "校级组织"
+  >("与你匹配");
   const [randomOpen, setRandomOpen] = useState(false);
   const [randomClubId, setRandomClubId] = useState<number | null>(null);
 
-  const tagToCategory: Record<Exclude<typeof selectedTag, "全部">, ClubCategory> = {
+  const tagToCategory: Record<
+    Exclude<typeof selectedTag, "全部" | "与你匹配">,
+    ClubCategory
+  > = {
     学术科技: "academic_tech",
     文化艺术: "culture_art",
     体育健身: "sports_fitness",
@@ -133,9 +136,9 @@ function StudentPageInner() {
   }, [mergedClubs]);
 
   const preferences = useMemo(() => {
-    const core = answers[0] as CoreMotivationTag | undefined;
-    const commitment = answers[1] as CommitmentTag | undefined;
-    const interests = ((answers[2] as string[] | undefined) || []) as InterestTag[];
+    const interests = ((answers[0] as string[] | undefined) || []) as InterestTag[];
+    const core = answers[1] as CoreMotivationTag | undefined;
+    const commitment = answers[2] as CommitmentTag | undefined;
     return { core, commitment, interests };
   }, [answers]);
 
@@ -146,7 +149,7 @@ function StudentPageInner() {
     for (const it of preferences.interests) {
       if (club.interests.includes(it)) score += 3;
     }
-    if (selectedTag !== "全部") {
+    if (selectedTag !== "全部" && selectedTag !== "与你匹配") {
       const cat = tagToCategory[selectedTag];
       if (club.category === cat) score += 2;
     }
@@ -156,7 +159,7 @@ function StudentPageInner() {
   const normalizedQuery = searchQuery.trim().toLowerCase();
   const filteredClubs = useMemo(() => {
     let list = mergedClubs;
-    if (selectedTag !== "全部") {
+    if (selectedTag !== "全部" && selectedTag !== "与你匹配") {
       const category = tagToCategory[selectedTag];
       list = list.filter((c) => c.category === category);
     }
@@ -170,7 +173,12 @@ function StudentPageInner() {
       });
     }
 
-    return [...list].sort((a, b) => scoreClub(b) - scoreClub(a));
+    const sorted = [...list].sort((a, b) => scoreClub(b) - scoreClub(a));
+    if (selectedTag === "与你匹配") {
+      const matched = sorted.filter((c) => scoreClub(c) > 0);
+      return matched.length ? matched : sorted.slice(0, 12);
+    }
+    return sorted;
   }, [mergedClubs, normalizedQuery, selectedTag, preferences.core, preferences.commitment, preferences.interests]);
 
   const getRandomInt = (maxExclusive: number) => {
@@ -187,7 +195,9 @@ function StudentPageInner() {
     const pool =
       selectedTag === "全部"
         ? mergedClubs
-        : mergedClubs.filter((c) => c.category === tagToCategory[selectedTag]);
+        : selectedTag === "与你匹配"
+          ? filteredClubs
+          : mergedClubs.filter((c) => c.category === tagToCategory[selectedTag]);
     if (pool.length === 0) return null;
     if (pool.length === 1) return pool[0].id;
     let next = pool[getRandomInt(pool.length)].id;
@@ -277,13 +287,14 @@ function StudentPageInner() {
                     placeholder="搜索社团名称或描述..." 
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full px-6 py-3 rounded-2xl bg-white border border-gray-100 shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all"
+                  className="w-full px-6 py-3 rounded-2xl bg-white text-gray-900 border border-gray-100 shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all"
                   />
                   <span className="absolute right-6 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
                 </div>
                 <div className="flex space-x-2 overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
-                  {([
-                    "全部",
+                {([
+                  "与你匹配",
+                  "全部",
                     "学术科技",
                     "文化艺术",
                     "体育健身",

@@ -19,7 +19,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-gradient-to-br from-yellow-50 to-white">
-      <div className="z-10 max-w-5xl w-full items-center justify-center font-mono text-sm flex flex-col space-y-12">
+      <div className="z-10 max-w-5xl w-full items-center justify-center text-sm flex flex-col space-y-12">
         <h1 className="text-5xl font-extrabold text-gray-900 tracking-tight">
           社团招新智能匹配平台
         </h1>

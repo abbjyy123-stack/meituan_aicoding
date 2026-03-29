@@ -101,7 +101,7 @@ function StudentProfilePageInner() {
                 <input
                   value={form.name}
                   onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
-                  className="w-full px-4 py-3 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  className="w-full px-4 py-3 rounded-2xl border border-gray-200 text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
                   placeholder="请输入姓名"
                 />
               </label>
@@ -110,7 +110,7 @@ function StudentProfilePageInner() {
                 <input
                   value={form.college}
                   onChange={(e) => setForm((p) => ({ ...p, college: e.target.value }))}
-                  className="w-full px-4 py-3 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  className="w-full px-4 py-3 rounded-2xl border border-gray-200 text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
                   placeholder="如：信息工程学院"
                 />
               </label>
@@ -119,7 +119,7 @@ function StudentProfilePageInner() {
                 <input
                   value={form.grade}
                   onChange={(e) => setForm((p) => ({ ...p, grade: e.target.value }))}
-                  className="w-full px-4 py-3 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  className="w-full px-4 py-3 rounded-2xl border border-gray-200 text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
                   placeholder="如：2025级"
                 />
               </label>
@@ -128,7 +128,7 @@ function StudentProfilePageInner() {
                 <input
                   value={form.studentNo}
                   onChange={(e) => setForm((p) => ({ ...p, studentNo: e.target.value }))}
-                  className="w-full px-4 py-3 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  className="w-full px-4 py-3 rounded-2xl border border-gray-200 text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
                   placeholder="请输入学号"
                 />
               </label>
@@ -137,7 +137,7 @@ function StudentProfilePageInner() {
                 <input
                   value={form.gender}
                   onChange={(e) => setForm((p) => ({ ...p, gender: e.target.value }))}
-                  className="w-full px-4 py-3 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  className="w-full px-4 py-3 rounded-2xl border border-gray-200 text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
                   placeholder="如：男/女"
                 />
               </label>
@@ -147,7 +147,7 @@ function StudentProfilePageInner() {
                 <textarea
                   value={form.bio}
                   onChange={(e) => setForm((p) => ({ ...p, bio: e.target.value }))}
-                  className="w-full px-4 py-3 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-yellow-400 min-h-[120px]"
+                  className="w-full px-4 py-3 rounded-2xl border border-gray-200 text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-yellow-400 min-h-[120px]"
                   placeholder="简单介绍一下自己：兴趣、特长、想加入社团的原因等"
                 />
               </label>
