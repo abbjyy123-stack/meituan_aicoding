@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { categoryLabels, clubsById } from '@/data/clubs';
+import { categoryLabels, clubsById, type HighlightItem } from '@/data/clubs';
 import { useStore } from '@/store/useStore';
 
 export default function ClubDetailPage() {
@@ -91,8 +91,8 @@ export default function ClubDetailPage() {
     return ['愿意参与社团活动', '尊重团队协作', '保持好奇心与行动力'];
   }, [club]);
 
-  const highlights = useMemo(() => {
-    if (!club) return [] as Array<{ id: string; type: 'photo' | 'video'; title: string; aspect: '1/1' | '4/3' | '16/9' }>;
+  const highlights = useMemo((): HighlightItem[] => {
+    if (!club) return [];
     if (club.highlights && club.highlights.length) return club.highlights;
     return [
       { id: 'h-1', type: 'photo', title: '活动现场', aspect: '16/9' },

@@ -1,8 +1,10 @@
 {
+  "/_not-found": "app/_not-found.js",
+  "/admin/verify/page": "app/admin/verify/page.js",
+  "/student/profile/page": "app/student/profile/page.js",
   "/page": "app/page.js",
   "/admin/page": "app/admin/page.js",
-  "/admin/verify/page": "app/admin/verify/page.js",
+  "/student/club/[id]/page": "app/student/club/[id]/page.js",
   "/student/page": "app/student/page.js",
-  "/student/profile/page": "app/student/profile/page.js",
-  "/student/club/[id]/page": "app/student/club/[id]/page.js"
+  "/admin/club/page": "app/admin/club/page.js"
 }
