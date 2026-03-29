@@ -1,9 +1,1 @@
-{
-  "/not-found": "app/not-found.js",
-  "/page": "app/page.js",
-  "/admin/verify/page": "app/admin/verify/page.js",
-  "/admin/page": "app/admin/page.js",
-  "/student/club/[id]/page": "app/student/club/[id]/page.js",
-  "/admin/club/page": "app/admin/club/page.js",
-  "/student/page": "app/student/page.js"
-}
+{}
