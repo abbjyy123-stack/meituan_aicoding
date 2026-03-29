@@ -1,6 +1,29 @@
 {
   "sortedMiddleware": [],
   "middleware": {},
-  "functions": {},
+  "functions": {
+    "/student/club/[id]/page": {
+      "files": [
+        "server/server-reference-manifest.js",
+        "server/app/student/club/[id]/page_client-reference-manifest.js",
+        "server/middleware-build-manifest.js",
+        "server/middleware-react-loadable-manifest.js",
+        "server/next-font-manifest.js",
+        "prerender-manifest.js",
+        "server/edge-runtime-webpack.js",
+        "server/app/student/club/[id]/page.js"
+      ],
+      "name": "app/student/club/[id]/page",
+      "page": "/student/club/[id]/page",
+      "matchers": [
+        {
+          "regexp": "^/student/club/(?<id>[^/]+?)$",
+          "originalSource": "/student/club/[id]"
+        }
+      ],
+      "wasm": [],
+      "assets": []
+    }
+  },
   "version": 2
 }

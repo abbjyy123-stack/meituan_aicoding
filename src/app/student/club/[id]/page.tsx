@@ -1,5 +1,7 @@
 'use client';
 
+export const runtime = 'edge';
+
 import { useMemo, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
