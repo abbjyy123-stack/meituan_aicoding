@@ -3,9 +3,9 @@
 import { useStore } from '@/store/useStore';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useMemo, useState } from 'react';
+import { Suspense, useMemo, useState } from 'react';
 
-export default function StudentProfilePage() {
+function StudentProfilePageInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const next = searchParams.get('next');
@@ -187,6 +187,14 @@ export default function StudentProfilePage() {
         )}
       </AnimatePresence>
     </div>
+  );
+}
+
+export default function StudentProfilePage() {
+  return (
+    <Suspense fallback={null}>
+      <StudentProfilePageInner />
+    </Suspense>
   );
 }
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { useStore } from '@/store/useStore';
-import { useEffect, useMemo, useState } from 'react';
+import { Suspense, useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter, useSearchParams } from 'next/navigation';
 import {
@@ -14,7 +14,7 @@ import {
   type InterestTag,
 } from '@/data/clubs';
 
-export default function StudentPage() {
+function StudentPageInner() {
   const { applications, clubOverrides, currentStudent, favorites, toggleFavorite, testCompleted, setTestCompleted } = useStore();
   const searchParams = useSearchParams();
   const viewParam = searchParams.get('view');
@@ -618,5 +618,13 @@ export default function StudentPage() {
         </AnimatePresence>
       </div>
     </div>
+  );
+}
+
+export default function StudentPage() {
+  return (
+    <Suspense fallback={null}>
+      <StudentPageInner />
+    </Suspense>
   );
 }
