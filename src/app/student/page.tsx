@@ -269,7 +269,6 @@ function StudentPageInner() {
               <header className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 space-y-4 md:space-y-0">
                 <div>
                   <h1 className="text-3xl font-bold text-gray-900">社团大厅</h1>
-                  <p className="text-gray-400">基于你的测试结果，我们为你推荐了以下社团</p>
                 </div>
                 <button 
                   onClick={openRandom}

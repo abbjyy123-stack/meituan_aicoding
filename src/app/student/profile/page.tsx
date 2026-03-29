@@ -133,7 +133,7 @@ function StudentProfilePageInner() {
                 />
               </label>
               <label className="space-y-2">
-                <div className="text-sm font-bold text-gray-700">性别（可选）</div>
+                <div className="text-sm font-bold text-gray-700">性别</div>
                 <input
                   value={form.gender}
                   onChange={(e) => setForm((p) => ({ ...p, gender: e.target.value }))}
